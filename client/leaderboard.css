@@ -38,6 +38,31 @@ body {
   text-align: center;
 }
 
+.options{
+  text-align: right;
+}
+
+.new_scientist{
+  border-radius: 3em;
+  border: #eb5f3a 1px solid;
+  background: transparent;
+  color: #eb5f3a;
+  cursor: pointer;
+  font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 5px 0;
+  outline: none;
+  padding: 10px 30px;
+  transition: all 200ms ease-in;
+}
+
+.new_scientist:hover {
+  background: #eb5f3a;
+  color: #fff;
+}
+
+
 .leaderboard {
   border-top: 1px solid #f1f1f1;
   counter-reset: ol-counter;
@@ -96,6 +121,11 @@ body {
   border-left: #eb5f3a 4px solid;
 }
 
+.player.selected .name{
+  font-weight: 400;
+}
+
+
 .player:hover {
   background-color: #fefff4;
 }
@@ -127,6 +157,15 @@ body {
   outline: none;
   padding: 10px 30px;
   transition: all 200ms ease-in;
+}
+
+.points.dec{
+  border-radius: 3em 0 0 3em;
+}
+
+.points.inc{
+  border-radius: 0 3em 3em 0;
+  border-left: none;
 }
 
 .points:hover {

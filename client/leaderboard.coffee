@@ -1,27 +1,29 @@
 Template.leaderboard.helpers
   players: ->
-    Players.find({}, { sort: { score: -1, name: 1 } })
+    Players.find({},{sort: {score: -1, name: 1}})
+  
+  selected: ->
+    "selected" if Session.get("jugador_seleccionado") == @_id
     
   selectedName: ->
-    player = Players.findOne(Session.get("selectedPlayer"))
-    player.name
-
+    _id = Session.get("jugador_seleccionado")
+    
+    Players.findOne(_id).name
+    
 Template.leaderboard.events
-  'click .inc': ->
-    selected_player_id = Session.get("selectedPlayer")
-    
-    Players.update(selected_player_id, {$inc: {score: 5}})
-    
-  'click .dec': ->
-    selected_player_id = Session.get("selectedPlayer")
-    
-    Players.update(selected_player_id, {$inc: {score: -5}})
+  "click .new_scientist": ->
+    Players.insert({
+      name: prompt("Ingrese el nombre del científico")
+      score: 0
+    })
   
-
-Template.player.helpers
-  selected: ->
-    "selected" if Session.equals("selectedPlayer", this._id)
-
-Template.player.events
-  'click': ->
-    Session.set("selectedPlayer", this._id)
+  "click .player": ->
+    Session.set("jugador_seleccionado", @_id)
+    
+  "click .inc": ->
+    _id = Session.get("jugador_seleccionado")
+    
+    score_actual = Players.findOne(_id).score
+    
+    Players.update(_id, {$set: {score: score_actual+5}})
+    

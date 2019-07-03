@@ -1,6 +1,5 @@
 <head>
   <title>Leaderboard</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
 </head>
 
@@ -9,32 +8,32 @@
     <div class="logo"></div>
     <h1 class="title">Marcador</h1>
     <div class="subtitle">Selecciona un científico para darle puntos</div>
-    {{> leaderboard}}
+    {{> leaderboard}}    
   </div>
 </body>
 
 <template name="leaderboard">
+  {{ nombreDeAlgo }}
+  <div class="options">
+    <button class="new_scientist">+ Añadir Nuevo</button>
+  </div>
+  
   <ol class="leaderboard">
     {{#each players}}
-      {{> player}}
+      <li class="player {{ selected }}">
+        <span class="name">{{name}}</span>
+        <span class="score">{{score}}</span>
+      </li>
     {{/each}}
   </ol>
 
   {{#if selectedName}}
     <div class="details">
       <div class="name">{{selectedName}}</div>
-      <button class="points inc">+ 1</button>
-      <button class="points dec">- 1</button>
+      <button class="points inc">+ 5</button>
+      <button class="points dec">- 5</button>
     </div>
   {{else}}
-    <div class="message">Click a player to select</div>
+    <div class="message">Selecciona un científico</div>
   {{/if}}
 </template>
-
-<template name="player">
-  <li class="player {{selected}}">
-    <span class="name">{{name}}</span>
-    <span class="score">{{score}}</span>
-  </li>
-</template>
-
