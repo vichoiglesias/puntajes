@@ -11,11 +11,20 @@ Template.leaderboard.helpers
     Players.findOne(_id).name
     
 Template.leaderboard.events
-  "click .new_scientist": ->
+  "submit form": (event, instance) ->
+    event.preventDefault()
+    nombre = instance.find("[name='nombre']").value
+    
+    unless nombre?.length >= 6
+      alert "El nombre debe tener 6 caracteres"
+      return
+      
     Players.insert({
-      name: prompt("Ingrese el nombre del científico")
+      name: nombre
       score: 0
     })
+    
+    instance.find("form").reset()
   
   "click .player": ->
     Session.set("jugador_seleccionado", @_id)
@@ -26,4 +35,10 @@ Template.leaderboard.events
     score_actual = Players.findOne(_id).score
     
     Players.update(_id, {$set: {score: score_actual+5}})
+  
+  "click .delete": ->
+    _id = Session.get("jugador_seleccionado")
+    
+    Players.remove(_id)
+    
     

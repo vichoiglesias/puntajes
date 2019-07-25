@@ -15,8 +15,14 @@
 <template name="leaderboard">
   {{ nombreDeAlgo }}
   <div class="options">
-    <button class="new_scientist">+ Añadir Nuevo</button>
+    <form>
+      <input name="nombre" placeholder="Nombre del Científico">
+      <input name="puntaje" placeholder="Puntaje">
+      <button class="new_scientist">+ Añadir Nuevo</button>
+    </form>
   </div>
+  
+  
   
   <ol class="leaderboard">
     {{#each players}}
@@ -30,6 +36,7 @@
   {{#if selectedName}}
     <div class="details">
       <div class="name">{{selectedName}}</div>
+      <button class="points delete">Eliminar</button>
       <button class="points inc">+ 5</button>
       <button class="points dec">- 5</button>
     </div>
