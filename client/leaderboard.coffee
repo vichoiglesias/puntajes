@@ -12,18 +12,23 @@ Template.leaderboard.helpers
     
 Template.leaderboard.events
   "submit form": (event, instance) ->
+    # prevenimos que el formulario se envíe
     event.preventDefault()
+    
+    # buscamos el valor del input con name=nombre
     nombre = instance.find("[name='nombre']").value
     
     unless nombre?.length >= 6
       alert "El nombre debe tener 6 caracteres"
       return
-      
+    
+    # guardamos en nuestra base de datos
     Players.insert({
       name: nombre
       score: 0
     })
     
+    # reseteamos el formulario
     instance.find("form").reset()
   
   "click .player": ->
